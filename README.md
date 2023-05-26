@@ -1,5 +1,7 @@
-# Implementing key-value store in GoLang 
+# Implementing concurrent key-value store in GoLang 
 ---
+
+(concurrency is achieved using goroutines)
 
 ## TODO:
 - data persistence

@@ -26,8 +26,10 @@ func main(){
 
   defer server.Close()
 
+  fmt.Println("Welcome to the in-memory key-value store")
   fmt.Println("Listening on "+SERVER_HOST+":"+SERVER_PORT)
   fmt.Println("Waiting for client... ")
+
   for{
     connection, err := server.Accept()
     if err!=nil{
@@ -41,9 +43,11 @@ func main(){
 func processClient(connection net.Conn, store map[string]string){
   buffer := make([]byte, 1024)
   mLen, err := connection.Read(buffer)
+
   if err!=nil{
     fmt.Println("Error reading: ", err.Error())
   }
+
   fmt.Println()
   content := strings.Split(string(buffer[:mLen]), "\n")
 
@@ -63,9 +67,7 @@ func processClient(connection net.Conn, store map[string]string){
 
   if get {
     fmt.Println("Get request made")
-    //TODO: parse the 'data' in the get format
     ret_val := store[data]
-    //TODO: add code for the case when the val is nil
     if ret_val==""{
       _, err = connection.Write([]byte("No value\n"))
     } else {
@@ -75,7 +77,6 @@ func processClient(connection net.Conn, store map[string]string){
 
   if set{
     fmt.Println("Set request made")
-    //TODO: parse the 'data' in the set format
     key_value := strings.Split(data, ",")
     store[key_value[0]] = key_value[1]
     _, err = connection.Write([]byte("Data written successfully\n"))
@@ -86,3 +87,4 @@ func processClient(connection net.Conn, store map[string]string){
 
   defer connection.Close()
 }
+
