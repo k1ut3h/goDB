@@ -2,6 +2,7 @@
 ---
 
 ## TODO:
+- data persistence
 - Improve README
 - Add more functionalities like DELETE, ROLLBACK etc.. 
 
@@ -14,4 +15,3 @@
 - enable data transfer(GET/POST) between client and server
 - store the incoming data into a hashmap
 - commands to store and retrieve data
-- data persistence
