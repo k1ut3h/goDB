@@ -78,7 +78,7 @@ func processClient(connection net.Conn, store map[string]string){
   if set{
     fmt.Println("Set request made")
     key_value := strings.Split(data, ",")
-    store[key_value[0]] = key_value[1]
+    store[strings.TrimSpace(key_value[0])] = strings.TrimSpace(key_value[1])
     _, err = connection.Write([]byte("Data written successfully\n"))
     if err!=nil{
       fmt.Println(err.Error())
@@ -87,4 +87,3 @@ func processClient(connection net.Conn, store map[string]string){
 
   defer connection.Close()
 }
-
